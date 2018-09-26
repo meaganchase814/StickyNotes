@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StickyNotes.Models.Notes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sticky Notes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@foreach (var item in Model) {
+<div class="Sticky">
+    @foreach (var Category in item.Category) {
+        <div class="Category">@Category.Category</div>
+    }
+    <div class="Title">@item.Title</div>
+    <div class="Text">@item.Text</div>
+    <div class="Now">@item.Now</div>
+    <div class="Edit">
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </div>
+
+</div>
+}
+
+    <form action="/Notes/Analyze" method="get">
+        Title: <input type="text" name="Title" /><br />
+        Text: <input type="text" name="Text" /><br />
+        Now: <input type="datetime" name="Now" /><br />
+        Category: <select name="Category">
+        <option value="1">Work</option>
+        <option value="2">Home</option>
+        <option value="3">To Do</option>
+    
+
+</select>
+        <input type="submit" />
+    </form>
+
